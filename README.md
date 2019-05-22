@@ -1,6 +1,6 @@
 
 # react-native-wifi-transfer
-
+手机端开启一个http服务器 可以接收局域网上传的文件 保存到app文档中 支持ios和android
 ## Getting started
 
 `$ npm install react-native-wifi-transfer --save`
@@ -43,7 +43,7 @@ import RNWifiTransfer from 'react-native-wifi-transfer';
 //接收新文件事件
 RNWifiTransfer.Emitter.addListener(HttpServer.FILE_UPLOAD_NEW, ({name: string,path: string})=>{});
 
-//开启服务器 知道找到可用端口
+//开启服务器 直到找到可用端口
 let port = 10000;
 openConnect = () => {
     console.warn("开启端口" + port);
