@@ -39,17 +39,11 @@
 ```javascript
 //导入模块
 import RNWifiTransfer from 'react-native-wifi-transfer';
-<<<<<<< HEAD
+
 //接收新文件事件
 RNWifiTransfer.Emitter.addListener(HttpServer.FILE_UPLOAD_NEW, ({name: string,path: string})=>{});
 
 //开启服务器 知道找到可用端口
-=======
-接收新文件
-RNWifiTransfer.Emitter.addListener(HttpServer.FILE_UPLOAD_NEW, ({name: string,path: string})=>{});
-
-```开启服务器 知道找到可用端口
->>>>>>> 67264dc261985b11f799255f4de772969c94a5cc
 let port = 10000;
 openConnect = () => {
     console.warn("开启端口" + port);
@@ -69,11 +63,7 @@ openConnect = () => {
 };
 openConnect();
 
-<<<<<<< HEAD
 //关闭服务器
-=======
-```关闭服务器
->>>>>>> 67264dc261985b11f799255f4de772969c94a5cc
 RNWifiTransfer.close();
 
 ```
