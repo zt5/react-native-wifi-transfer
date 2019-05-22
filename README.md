@@ -37,9 +37,33 @@
 
 ## Usage
 ```javascript
+//导入模块
 import RNWifiTransfer from 'react-native-wifi-transfer';
+//接收新文件事件
+RNWifiTransfer.Emitter.addListener(HttpServer.FILE_UPLOAD_NEW, ({name: string,path: string})=>{});
 
-// TODO: What to do with the module?
-RNWifiTransfer;
+//开启服务器 知道找到可用端口
+let port = 10000;
+openConnect = () => {
+    console.warn("开启端口" + port);
+    RNWifiTransfer.start(port).then((ip) => {
+        console.warn("开启成功" + ip);
+    }).catch(err => {
+        if (err.code === RNWifiTransfer.ERROR_PORT_ALREADY_BIND) {
+            const newPort = port + 1;
+            console.warn("端口" + port + "被占用,尝试" + newPort);
+            port = newPort;
+            //端口被占用了
+            setTimeout(openConnect, 300);
+        } else {
+            console.error(err);
+        }
+    });
+};
+openConnect();
+
+//关闭服务器
+RNWifiTransfer.close();
+
 ```
   
