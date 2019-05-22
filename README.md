@@ -41,7 +41,7 @@
 import RNWifiTransfer from 'react-native-wifi-transfer';
 
 //接收新文件事件
-RNWifiTransfer.Emitter.addListener(HttpServer.FILE_UPLOAD_NEW, ({name: string,path: string})=>{});
+RNWifiTransfer.Emitter.addListener(RNWifiTransfer.FILE_UPLOAD_NEW, ({name: string,path: string})=>{});
 
 //开启服务器 直到找到可用端口
 let port = 10000;
@@ -50,6 +50,11 @@ openConnect = () => {
     RNWifiTransfer.start(port).then((ip) => {
         console.warn("开启成功" + ip);
     }).catch(err => {
+        //打开错误码
+        //1. wifi没有打开 RNWifiTransfer.ERROR_WIFI_NOT_OPEN
+        //2. 打开错误 打开连接错误 RNWifiTransfer.ERROR_CONNECT_OPEN
+        //3. 打开错误 端口被占用 RNWifiTransfer.ERROR_PORT_ALREADY_BIND
+    
         if (err.code === RNWifiTransfer.ERROR_PORT_ALREADY_BIND) {
             const newPort = port + 1;
             console.warn("端口" + port + "被占用,尝试" + newPort);
