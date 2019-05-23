@@ -3,7 +3,6 @@
 #import "HttpServer.h"
 #import "Reachability.h"
 
-
 static NSString *ERROR_WIFI_NOT_OPEN = @"1";
 static NSString *ERROR_CONNECT_OPEN = @"2";
 static NSString *ERROR_PORT_ALREADY_BIND = @"4";
@@ -92,9 +91,8 @@ static NSString *FILE_UPLOAD_NEW = @"FILE_UPLOAD_NEW";
 
 
 @implementation RNWifiTransfer{
-    HttpServer *server;
+     HttpServer *server;
 }
-
 
 RCT_EXPORT_METHOD(
                   start:
@@ -106,7 +104,7 @@ RCT_EXPORT_METHOD(
                   ) {
     [self close];
     server = [[HttpServer alloc] init];
-    HttpServerModule __weak *tmp = self;
+    RNWifiTransfer __weak *tmp = self;
     server.sendEvent = ^(NSString *event, id body) {
         [tmp sendEventWithName:event body:body];
     };
@@ -124,6 +122,15 @@ RCT_EXPORT_METHOD(close) {
     return @[FILE_UPLOAD_NEW];
 }
 
+- (dispatch_queue_t)methodQueue
+{
+    return dispatch_get_main_queue();
+}
+
++ (BOOL)requiresMainQueueSetup {
+    return YES;
+}
+
 - (NSDictionary *)constantsToExport {
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     dic[@"ERROR_WIFI_NOT_OPEN"] = ERROR_WIFI_NOT_OPEN;
@@ -131,15 +138,6 @@ RCT_EXPORT_METHOD(close) {
     dic[@"ERROR_PORT_ALREADY_BIND"] = ERROR_PORT_ALREADY_BIND;
     dic[@"FILE_UPLOAD_NEW"] = FILE_UPLOAD_NEW;
     return dic;
-}
-
-+ (BOOL)requiresMainQueueSetup {
-    return YES;
-}
-
-- (dispatch_queue_t)methodQueue
-{
-    return dispatch_get_main_queue();
 }
 
 RCT_EXPORT_MODULE()
