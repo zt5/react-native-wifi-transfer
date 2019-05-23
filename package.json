@@ -2,7 +2,7 @@
 {
   "name": "react-native-wifi-transfer",
   "version": "1.0.0",
-  "description": "",
+  "description": "手机上开启http服务 可以在局域网上传文件",
   "main": "index.js",
   "scripts": {
   },
