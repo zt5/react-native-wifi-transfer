@@ -44,7 +44,7 @@
 import RNWifiTransfer from 'react-native-wifi-transfer';
 
 //接收新文件事件
-RNWifiTransfer.Emitter.addListener(RNWifiTransfer.FILE_UPLOAD_NEW, ({name: string,path: string})=>{});
+RNWifiTransfer.Emitter.addListener(RNWifiTransfer.FILE_UPLOAD_NEW, (files:{name: string,path: string}[])=>{});
 
 //开启服务器 直到找到可用端口
 let port = 10000;
